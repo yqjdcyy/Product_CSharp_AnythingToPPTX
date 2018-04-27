@@ -13,25 +13,28 @@ namespace AnythingToPPTX
             // check
             if (args.Length <= 0)
             {
-                Console.WriteLine("*.exe images.path, template.path, isOpenFolderAfterConvert");
+                Console.WriteLine("*.exe images.path, pptx.store.path, template.path, isOpenFolderAfterConvert");
                 return;
             }
 
             // init
             String path = args[0];
+            String dest = null;
             String template = null;
             bool bOpenFolder = true;
             int size = args.Length;
             if (size > 1)
-                template = args[1];
+                dest = args[1];
             if (size > 2)
-                bOpenFolder = Boolean.Parse(args[2]);
+                template = args[2];
+            if (size > 3)
+                bOpenFolder = Boolean.Parse(args[3]);
 
 
             // convert
             try
             {
-                ImageToPPTX(path, template, bOpenFolder);
+                ImageToPPTX(path, dest, template, bOpenFolder);
             }
             catch (Exception e)
             {
@@ -85,11 +88,12 @@ namespace AnythingToPPTX
             System.Diagnostics.Process.Start("explorer.exe", path + "\\output");
         }
 
-        private static void ImageToPPTX(String path, String temp, Boolean bOpen)
+        private static void ImageToPPTX(String path, String dest, String temp, Boolean bOpen)
         {
             // init
             List<String> list = new List<String>();
             ImageToPPTXTemplateUtils converter = new ImageToPPTXTemplateUtils();
+            dest = String.IsNullOrEmpty(dest) ? (path + @"\output") : dest;
 
             // switch
             if (File.Exists(path))
@@ -110,7 +114,7 @@ namespace AnythingToPPTX
                 throw new Exception("错误的文件路径");
             }
 
-            converter.convert(path + @"\output", list, temp);
+            converter.convert(dest, list, temp);
             if (bOpen)
                 System.Diagnostics.Process.Start("explorer.exe", path + "\\output");
         }
