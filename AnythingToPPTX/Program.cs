@@ -17,12 +17,19 @@ namespace AnythingToPPTX
                 return;
             }
 
+            // print
+            int size = args.Length;
+            Console.WriteLine("Arguments=");
+            for (int i = 0; i < size; i++)
+            {
+                Console.WriteLine("\t{0}", args[i]);
+            }
+
             // init
             String path = args[0];
             String dest = null;
             String template = null;
             bool bOpenFolder = true;
-            int size = args.Length;
             if (size > 1)
                 dest = args[1];
             if (size > 2)
@@ -40,8 +47,6 @@ namespace AnythingToPPTX
             {
                 Console.WriteLine(String.Format("Convert fail: {0}", e.StackTrace));
             }
-
-            Console.ReadLine();
         }
 
         private static void PDFToPPTX()
@@ -116,7 +121,7 @@ namespace AnythingToPPTX
 
             converter.convert(dest, list, temp);
             if (bOpen)
-                System.Diagnostics.Process.Start("explorer.exe", path + "\\output");
+                System.Diagnostics.Process.Start("explorer.exe", dest.Replace("\\\\", "\\"));
         }
     }
 }

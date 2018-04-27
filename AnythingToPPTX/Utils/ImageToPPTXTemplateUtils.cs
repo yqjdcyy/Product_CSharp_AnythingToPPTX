@@ -152,7 +152,6 @@ namespace AnythingToPPTX.Utils
             fileStream.Close();
         }
 
-
         public string convert(String path, List<PPTPage> pageList)
         {
             ImageInfoUtils utils = new ImageInfoUtils();
@@ -391,6 +390,7 @@ namespace AnythingToPPTX.Utils
 
             return getSlideByRelationShipId(presentationPart, newSlideId.RelationshipId);
         }
+
         private Slide getSlideByRelationShipId(PresentationPart presentationPart, StringValue relationshipId)
         {
             SlidePart slidePart = presentationPart.GetPartById(relationshipId) as SlidePart;
