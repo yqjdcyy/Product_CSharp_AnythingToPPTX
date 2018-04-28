@@ -45,7 +45,7 @@ namespace AnythingToPPTX
             }
             catch (Exception e)
             {
-                Console.WriteLine(String.Format("Convert fail: {0}", e.StackTrace));
+                Console.WriteLine(String.Format("Convert fail: {0}", e.ToString()));
             }
         }
 
@@ -121,7 +121,7 @@ namespace AnythingToPPTX
 
             converter.convert(dest, list, temp);
             if (bOpen)
-                System.Diagnostics.Process.Start("explorer.exe", dest.Replace("\\\\", "\\"));
+                System.Diagnostics.Process.Start("explorer.exe", dest.Replace("\\\\", "\\").Replace("/", "\\"));
         }
     }
 }

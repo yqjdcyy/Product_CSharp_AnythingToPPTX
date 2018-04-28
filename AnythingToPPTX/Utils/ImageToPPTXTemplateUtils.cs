@@ -39,7 +39,7 @@ namespace AnythingToPPTX.Utils
             if (0 == max.Width || 0 == max.Height)
                 throw new Exception("The format of resource images is invalid");
             if (!File.Exists(tempPath))
-                throw new Exception("The pointed PPTX template is not exists");
+                throw new Exception(String.Format("The pointed PPTX template[{0}] is not exists", tempPath));
 
             return convert(path, tempPath, imgList, max);
         }
@@ -67,7 +67,7 @@ namespace AnythingToPPTX.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine(String.Format("Convert fail: {0}",ex.StackTrace));
+                Console.WriteLine(String.Format("Convert fail: {0}",ex.ToString()));
                 //if (File.Exists(filePath))
                     //File.Delete(filePath);
             }
